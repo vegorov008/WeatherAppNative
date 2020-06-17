@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">WeatherAppAndroid</string>
+    <string name="action_settings">Settings</string>
+
+  <!--weather-->
+  <string name="GetWeather">Get weather</string>
+  <string name="Temp">Temp:</string>
+  <string name="Humidity">Humidity:</string>
+
+  <string name="UserLocationPermissionRationale">Allow app to get your current location to get information about weather in that place</string>
+
+  <string name="Loading">Loading...</string>
+  <string name="Accept">Accept</string>
+  <string name="Deny">Deny</string>
+</resources>

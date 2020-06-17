@@ -1,0 +1,15 @@
+﻿<resources>
+  <string name="app_name">WeatherAppAndroid</string>
+  <string name="action_settings">Настройки</string>
+
+  <!--weather-->
+  <string name="GetWeather">Узнать погоду</string>
+  <string name="Temp">Температура:</string>
+  <string name="Humidity">Влажность:</string>
+
+  <string name="UserLocationPermissionRationale">Для показа погоды требуется информация о текущем местоположении</string>
+
+  <string name="Loading">Загрузка...</string>
+  <string name="Accept">Разрешить</string>
+  <string name="Deny">Запретить</string>
+</resources>

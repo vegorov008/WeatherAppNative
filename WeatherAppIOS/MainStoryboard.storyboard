@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="222">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="221">
+            <objects>
+                <viewController id="222" sceneMemberID="viewController" customClass="MainStoryboardViewController" storyboardIdentifier="MainStoryboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="219"/>
+                        <viewControllerLayoutGuide type="bottom" id="220"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="223">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="445" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                <rect key="frame" x="36" y="44" width="336" height="38"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="446" translatesAutoresizingMaskIntoConstraints="NO" text="Temp:" misplaced="YES">
+                                        <rect key="frame" x="8" y="8" width="70" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="447" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES" text="0">
+                                        <rect key="frame" x="108" y="4" width="19" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="448" translatesAutoresizingMaskIntoConstraints="NO" text="Humidity:" misplaced="YES">
+                                        <rect key="frame" x="158" y="4" width="86" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="449" translatesAutoresizingMaskIntoConstraints="NO" text="0" misplaced="YES">
+                                        <rect key="frame" x="280" y="4" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint id="456" firstItem="446" firstAttribute="leading" secondItem="445" secondAttribute="leading" constant="8"/>
+                                    <constraint id="457" firstAttribute="bottom" secondItem="446" secondAttribute="bottom" constant="8"/>
+                                    <constraint id="458" firstItem="446" firstAttribute="top" secondItem="445" secondAttribute="top" constant="8"/>
+                                    <constraint id="459" firstItem="447" firstAttribute="leading" secondItem="446" secondAttribute="trailing" constant="8"/>
+                                    <constraint id="460" firstItem="447" firstAttribute="top" secondItem="445" secondAttribute="top" constant="8"/>
+                                    <constraint id="461" firstAttribute="bottom" secondItem="447" secondAttribute="bottom" constant="8"/>
+                                    <constraint id="2282" firstItem="448" firstAttribute="leading" secondItem="447" secondAttribute="centerX" constant="23"/>
+                                    <constraint id="2283" firstItem="449" firstAttribute="leading" secondItem="448" secondAttribute="trailing" constant="8"/>
+                                    <constraint id="2284" firstItem="448" firstAttribute="top" secondItem="445" secondAttribute="top" constant="8"/>
+                                    <constraint id="2285" firstAttribute="bottom" secondItem="448" secondAttribute="bottom" constant="8"/>
+                                    <constraint id="2286" firstItem="449" firstAttribute="top" secondItem="445" secondAttribute="top" constant="8"/>
+                                    <constraint id="2287" firstAttribute="bottom" secondItem="449" secondAttribute="bottom" constant="8"/>
+                                </constraints>
+                            </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="450" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                <rect key="frame" x="39" y="127" width="329" height="513"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" id="451" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="28" y="698" width="358" height="30"/>
+                                <state key="normal" title="Get weather"/>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint id="452" firstItem="445" firstAttribute="leading" secondItem="223" secondAttribute="leadingMargin" constant="8"/>
+                            <constraint id="454" firstAttribute="trailingMargin" secondItem="445" secondAttribute="trailing" constant="8"/>
+                            <constraint id="455" firstItem="445" firstAttribute="top" secondItem="219" secondAttribute="bottom" constant="8"/>
+                            <constraint id="462" firstItem="450" firstAttribute="top" secondItem="445" secondAttribute="bottom" constant="8"/>
+                            <constraint id="463" firstItem="450" firstAttribute="leading" secondItem="223" secondAttribute="leadingMargin"/>
+                            <constraint id="464" firstAttribute="trailingMargin" secondItem="450" secondAttribute="trailing"/>
+                            <constraint id="465" firstItem="451" firstAttribute="top" secondItem="450" secondAttribute="bottom" constant="31"/>
+                            <constraint id="466" firstItem="451" firstAttribute="leading" secondItem="223" secondAttribute="leadingMargin" constant="8"/>
+                            <constraint id="467" firstAttribute="trailingMargin" secondItem="451" secondAttribute="trailing" constant="8"/>
+                            <constraint id="468" firstItem="220" firstAttribute="top" secondItem="451" secondAttribute="bottom" constant="8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="Map" destination="450" id="name-outlet-450"/>
+                        <outlet property="WeatherButton" destination="451" id="name-outlet-451"/>
+                        <outlet property="TempTitleLabel" destination="446" id="name-outlet-446"/>
+                        <outlet property="TempValueLabel" destination="447" id="name-outlet-447"/>
+                        <outlet property="HumTitleLabel" destination="448" id="name-outlet-448"/>
+                        <outlet property="HumValueLabel" destination="449" id="name-outlet-449"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="224" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-200" y="-388"/>
+        </scene>
+    </scenes>
+</document>

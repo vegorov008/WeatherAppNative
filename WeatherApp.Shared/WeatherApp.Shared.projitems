@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>0fd6916e-7fee-4f74-bf64-163e40516c27</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>WeatherApp.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Main.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\OpenWeatherMap\Coordinates.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\OpenWeatherMap\GetWeatherResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\OpenWeatherMap\Weather.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\WeatherData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ExceptionHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IExceptionHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\WeatherService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\WebService.cs" />
+  </ItemGroup>
+</Project>

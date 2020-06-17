@@ -1,0 +1,17 @@
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\bin\iPhone\Debug\Blank.exe
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\bin\iPhone\Debug\Blank.pdb
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\bin\iPhone\Debug\Plugin.Geolocator.dll
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\bin\iPhone\Debug\Plugin.Permissions.dll
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\bin\iPhone\Debug\Plugin.Geolocator.xml
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\bin\iPhone\Debug\Plugin.Permissions.xml
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\obj\iPhone\Debug\ibtool\_BundleResourceWithLogicalName.items
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\obj\iPhone\Debug\actool\_PartialAppManifest.items
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\obj\iPhone\Debug\actool\_BundleResourceWithLogicalName.items
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\obj\iPhone\Debug\coremlc\_PartialAppManifest.items
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\obj\iPhone\Debug\coremlc\_BundleResourceWithLogicalName.items
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\obj\iPhone\Debug\optimized\Entitlements.plist
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\obj\iPhone\Debug\optimized\
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\obj\iPhone\Debug\WeatherAppIOS.csproj.CoreCompileInputs.cache
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\obj\iPhone\Debug\WeatherAppIOS.csproj.CopyComplete
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\obj\iPhone\Debug\Blank.exe
+D:\Projects\Xamarin\WeatherAppNative\WeatherAppIOS\obj\iPhone\Debug\Blank.pdb
