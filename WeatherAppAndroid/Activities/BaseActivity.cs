@@ -43,19 +43,6 @@ namespace WeatherAppAndroid.Activities
             }
         }
 
-        protected override void OnResume()
-        {
-            try
-            {
-                base.OnResume();
-                uiThreadId = Java.Lang.Thread.CurrentThread().Id;
-            }
-            catch (Exception ex)
-            {
-                ExceptionHandler.HandleException(ex);
-            }
-        }
-
         public void ShowProgressDialog()
         {
             try
@@ -63,7 +50,7 @@ namespace WeatherAppAndroid.Activities
                 if (ProgressDialog != null)
                     if (!IsUiThread)
                     {
-                        RunOnUiThread(() =>
+                        RunOnMainThread(() =>
                         {
                             try
                             {
@@ -93,7 +80,7 @@ namespace WeatherAppAndroid.Activities
                 if (ProgressDialog != null && ProgressDialog.IsShowing)
                     if (!IsUiThread)
                     {
-                        this.RunOnUiThread(() =>
+                        this.RunOnMainThread(() =>
                         {
                             try
                             {
@@ -120,28 +107,42 @@ namespace WeatherAppAndroid.Activities
         {
             try
             {
-                if (IsUiThread)
+                try
                 {
-                    action.Invoke();
-                }
-                else
-                {
-                    RunOnUiThread(() =>
+                    if (IsUiThread)
                     {
-                        try
+                        action.Invoke();
+                    }
+                    else
+                    {
+                        RunOnUiThread(() =>
                         {
-                            action.Invoke();
-                        }
-                        catch (Exception ex)
-                        {
-                            ExceptionHandler.HandleException(ex);
-                        }
-                    });
+                            try
+                            {
+                                try
+                                {
+                                    action.Invoke();
+                                }
+                                catch (Exception ex)
+                                {
+                                    ExceptionHandler.HandleException(ex);
+                                }
+                            }
+                            catch
+                            {
+
+                            }
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ExceptionHandler.HandleException(ex);
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                ExceptionHandler.HandleException(ex);
+
             }
         }
     }

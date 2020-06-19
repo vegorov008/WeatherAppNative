@@ -1,24 +1,19 @@
-﻿using Android;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Android;
 using Android.App;
 using Android.Content.PM;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.OS;
 using Android.Runtime;
-using Android.Views;
 using Android.Widget;
-
 using Plugin.CurrentActivity;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
-
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
 using WeatherApp.Core.Models;
 using WeatherApp.Core.Services;
-
 using WeatherAppAndroid.Services;
 
 namespace WeatherAppAndroid.Activities
@@ -26,7 +21,6 @@ namespace WeatherAppAndroid.Activities
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : BaseActivity, IOnMapReadyCallback
     {
-        View root = null;
         TextView tempValueTextView = null;
         TextView humValueTextView = null;
 
@@ -68,8 +62,6 @@ namespace WeatherAppAndroid.Activities
 
                 // geolocator service
                 CrossCurrentActivity.Current.Init(Application);
-
-                root = FindViewById<View>(Resource.Id.RootLayout);
 
                 // google map
                 var mapContainer = FindViewById<LinearLayout>(Resource.Id.MapContainer);
@@ -145,22 +137,27 @@ namespace WeatherAppAndroid.Activities
         {
             try
             {
-                Action action = new Action(() =>
+                RunOnMainThread(() =>
                 {
-                    if (OnUserLocationPermissionGranted != null)
-                        OnUserLocationPermissionGranted -= SetupGoogleMap;
-
-                    if (map != null)
+                    try
                     {
-                        //if (!map.MyLocationEnabled)
-                        //    map.MyLocationEnabled = true;
+                        if (OnUserLocationPermissionGranted != null)
+                            OnUserLocationPermissionGranted -= SetupGoogleMap;
 
-                        map.MyLocationButtonClick += Map_UserLocationButtonClick;
-                        MoveCameraToUserLocation();
+                        if (map != null)
+                        {
+                            //if (!map.MyLocationEnabled)
+                            //    map.MyLocationEnabled = true;
+
+                            map.MyLocationButtonClick += Map_UserLocationButtonClick;
+                            MoveCameraToUserLocation();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionHandler.HandleException(ex);
                     }
                 });
-
-                RunOnMainThread(action);
             }
             catch (Exception ex)
             {
@@ -173,21 +170,26 @@ namespace WeatherAppAndroid.Activities
         {
             try
             {
-                Action action = new Action(() =>
+                RunOnMainThread(() =>
                 {
-                    if (userLocationMarker == null)
+                    try
                     {
-                        MarkerOptions options = new MarkerOptions();
-                        options.SetPosition(new LatLng(position.Latitude, position.Longitude));
-                        userLocationMarker = map.AddMarker(options);
+                        if (userLocationMarker == null)
+                        {
+                            MarkerOptions options = new MarkerOptions();
+                            options.SetPosition(new LatLng(position.Latitude, position.Longitude));
+                            userLocationMarker = map.AddMarker(options);
+                        }
+                        else
+                        {
+                            userLocationMarker.Position = new LatLng(position.Latitude, position.Longitude);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        userLocationMarker.Position = new LatLng(position.Latitude, position.Longitude);
+                        ExceptionHandler.HandleException(ex);
                     }
                 });
-
-                RunOnMainThread(action);
             }
             catch (Exception ex)
             {
@@ -248,7 +250,7 @@ namespace WeatherAppAndroid.Activities
                 {
                     if (!IsUiThread)
                     {
-                        RunOnUiThread(() =>
+                        RunOnMainThread(() =>
                         {
                             try
                             {
@@ -310,24 +312,18 @@ namespace WeatherAppAndroid.Activities
                 var weatherData = await WeatherService.Instance.GetWeather(position.Latitude, position.Longitude);
                 if (weatherData != null)
                 {
-                    if (IsUiThread)
+                    RunOnMainThread(() =>
                     {
-                        UpdateWeatherUI(weatherData);
-                        HideProgressDialog();
-                    }
-                    else
-                        RunOnUiThread(() =>
+                        try
                         {
-                            try
-                            {
-                                UpdateWeatherUI(weatherData);
-                            }
-                            catch (Exception ex)
-                            {
-                                ExceptionHandler.HandleException(ex);
-                            }
+                            UpdateWeatherUI(weatherData);
                             HideProgressDialog();
-                        });
+                        }
+                        catch (Exception ex)
+                        {
+                            ExceptionHandler.HandleException(ex);
+                        }
+                    });
                 }
             }
             catch (Exception ex)
@@ -373,6 +369,10 @@ namespace WeatherAppAndroid.Activities
                                 });
                             }
                         }
+                        else
+                        {
+                            HideProgressDialog();
+                        }
                         break;
                 }
             }
@@ -402,14 +402,7 @@ namespace WeatherAppAndroid.Activities
             {
                 if (ShouldShowRequestPermissionRationale(Manifest.Permission.AccessCoarseLocation) || ShouldShowRequestPermissionRationale(Manifest.Permission.AccessFineLocation))
                 {
-                    if (IsUiThread)
-                    {
-                        ShowLocationPermissionRationale();
-                    }
-                    else
-                    {
-                        RunOnUiThread(ShowLocationPermissionRationale);
-                    }
+                    RunOnMainThread(ShowLocationPermissionRationale);
                 }
                 else
                 {
@@ -443,7 +436,18 @@ namespace WeatherAppAndroid.Activities
                     }
                 });
 
-                alertBuilder.SetNegativeButton(Resource.String.Deny, (sender, e) => { });
+                alertBuilder.SetNegativeButton(Resource.String.Deny, (sender, e) => 
+                {
+                    try
+                    {
+                        HideProgressDialog();
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionHandler.HandleException(ex);
+                    }
+                });
+
                 alertBuilder.Show();
             }
             catch (Exception ex)
