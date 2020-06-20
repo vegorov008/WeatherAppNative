@@ -12,8 +12,10 @@ using Android.Widget;
 using Plugin.CurrentActivity;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
+using WeatherApp.Core;
 using WeatherApp.Core.Models;
 using WeatherApp.Core.Services;
+using WeatherApp.Shared.Services;
 using WeatherAppAndroid.Services;
 
 namespace WeatherAppAndroid.Activities
@@ -55,6 +57,8 @@ namespace WeatherAppAndroid.Activities
                 SetContentView(Resource.Layout.activity_main);
 
                 ShowProgressDialog();
+
+                Ioc.RegisterSingleton<IWeatherService, WeatherService>();
 
                 // weather button
                 var weatherButton = FindViewById<Button>(Resource.Id.GetWeatherButton);
@@ -309,7 +313,7 @@ namespace WeatherAppAndroid.Activities
                 if (OnUserLocationReceived != null)
                     OnUserLocationReceived -= GetWeater_OnUserLocationReceived;
 
-                var weatherData = await WeatherService.Instance.GetWeather(position.Latitude, position.Longitude);
+                var weatherData = await Ioc.GetInstance<IWeatherService>().GetWeather(position.Latitude, position.Longitude);
                 if (weatherData != null)
                 {
                     RunOnMainThread(() =>

@@ -9,14 +9,19 @@
     <Import_RootNamespace>WeatherApp.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Main.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\CollectionsExtesions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Ioc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\OpenWeatherMap\Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\OpenWeatherMap\Coordinates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\OpenWeatherMap\GetWeatherResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\OpenWeatherMap\Weather.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\WeatherData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ExceptionHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IExceptionHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IWeatherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WeatherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WebService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\IIocContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\IocContainer.cs" />
   </ItemGroup>
 </Project>

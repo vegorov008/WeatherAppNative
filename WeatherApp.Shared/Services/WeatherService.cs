@@ -5,32 +5,21 @@ using System.Threading.Tasks;
 
 using WeatherApp.Core.Models;
 using WeatherApp.Core.Models.OpenWeatherMap;
+using WeatherApp.Shared.Services;
 
 namespace WeatherApp.Core.Services
 {
-    public class WeatherService
+    public class WeatherService : IWeatherService
     {
         const string apiKey = "95416e17b99a1d201f157e0ef276134e";
         const string weatherUri = "https://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid={2}";
 
-        static WeatherService instance = null;
-
-        public static WeatherService Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new WeatherService();
-                return instance;
-            }
-        }
-
         public async Task<WeatherData> GetWeather(double lat, double lon)
         {
+            WeatherData weatherData = null;
+
             try
             {
-                WeatherData weatherData = null;
-
                 string uri = string.Format(weatherUri, lat, lon, apiKey);
 
                 var response = await WebService.Instance.Get(uri);
@@ -45,14 +34,13 @@ namespace WeatherApp.Core.Services
                         Humidity = Math.Round(responseContent.Main.Humidity, 1)
                     };
                 }
-
-                return weatherData;
             }
             catch (Exception ex)
             {
                 ExceptionHandler.HandleException(ex);
-                return null;
             }
+
+            return weatherData;
         }
     }
 }

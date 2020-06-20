@@ -7,9 +7,10 @@ using System.CodeDom.Compiler;
 using System.Threading.Tasks;
 
 using UIKit;
-
+using WeatherApp.Core;
 using WeatherApp.Core.Models;
 using WeatherApp.Core.Services;
+using WeatherApp.Shared.Services;
 
 namespace WeatherAppIOS
 {
@@ -22,7 +23,7 @@ namespace WeatherAppIOS
 
         public MainStoryboardViewController()
         {
-            string str = string.Empty;
+            
         }
 
         public MainStoryboardViewController(IntPtr handle) : base(handle)
@@ -117,7 +118,7 @@ namespace WeatherAppIOS
                 var location = locationManager.Location;
                 if (location != null)
                 {
-                    var weatherData = await WeatherService.Instance.GetWeather(location.Coordinate.Latitude, location.Coordinate.Longitude);
+                    var weatherData = await Ioc.GetInstance<IWeatherService>().GetWeather(location.Coordinate.Latitude, location.Coordinate.Longitude);
                     if (weatherData != null)
                     {
                         InvokeOnMainThread(() => UpdateWeatherUI(weatherData));

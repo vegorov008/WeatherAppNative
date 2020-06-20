@@ -3,6 +3,8 @@ using Foundation;
 using System;
 using UIKit;
 using WeatherApp.Core.Services;
+using WeatherApp.Core;
+using WeatherApp.Shared.Services;
 
 namespace WeatherAppIOS
 {
@@ -32,8 +34,7 @@ namespace WeatherAppIOS
                 var controller = Storyboard.InstantiateInitialViewController();
                 Window.RootViewController = controller;
 
-                //MainViewController mainViewController = new MainViewController();
-                //Window.RootViewController = mainViewController;
+                Ioc.RegisterSingleton<IWeatherService, WeatherService>();
 
                 // make the window visible
                 Window.MakeKeyAndVisible();
