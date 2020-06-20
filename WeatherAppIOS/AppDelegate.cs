@@ -1,10 +1,10 @@
-﻿using WeatherAppIOS.Services;
+﻿using System;
 using Foundation;
-using System;
 using UIKit;
-using WeatherApp.Core.Services;
 using WeatherApp.Core;
+using WeatherApp.Core.Services;
 using WeatherApp.Shared.Services;
+using WeatherAppIOS.Services;
 
 namespace WeatherAppIOS
 {

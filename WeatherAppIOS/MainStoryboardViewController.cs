@@ -1,11 +1,8 @@
-﻿using CoreLocation;
-
-using Foundation;
-
-using System;
+﻿using System;
 using System.CodeDom.Compiler;
 using System.Threading.Tasks;
-
+using CoreLocation;
+using Foundation;
 using UIKit;
 using WeatherApp.Core;
 using WeatherApp.Core.Models;

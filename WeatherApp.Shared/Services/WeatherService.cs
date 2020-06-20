@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-
-using System;
+﻿using System;
 using System.Threading.Tasks;
-
+using Newtonsoft.Json;
 using WeatherApp.Core.Models;
 using WeatherApp.Core.Models.OpenWeatherMap;
 using WeatherApp.Shared.Services;
@@ -30,7 +28,7 @@ namespace WeatherApp.Core.Services
 
                     weatherData = new WeatherData()
                     {
-                        Temp = Math.Round(responseContent.Main.Temp - 273.15, 1),
+                        Temp = Math.Round(KelvinToCelsius(responseContent.Main.Temp), 1),
                         Humidity = Math.Round(responseContent.Main.Humidity, 1)
                     };
                 }
@@ -41,6 +39,11 @@ namespace WeatherApp.Core.Services
             }
 
             return weatherData;
+        }
+
+        double KelvinToCelsius(double kelvin)
+        {
+            return kelvin - 273.15;
         }
     }
 }

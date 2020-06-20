@@ -1,9 +1,7 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
-
-using System;
-
 using WeatherApp.Core.Services;
 
 namespace WeatherAppAndroid.Activities
@@ -39,7 +37,7 @@ namespace WeatherAppAndroid.Activities
             }
             catch (Exception ex)
             {
-                ExceptionHandler.Instance.HandleException(ex);
+                ExceptionHandler.HandleException(ex);
             }
         }
 
@@ -48,28 +46,23 @@ namespace WeatherAppAndroid.Activities
             try
             {
                 if (ProgressDialog != null)
-                    if (!IsUiThread)
+                {
+                    RunOnMainThread(() =>
                     {
-                        RunOnMainThread(() =>
+                        try
                         {
-                            try
-                            {
-                                ProgressDialog.Show();
-                            }
-                            catch (Exception ex)
-                            {
-                                ExceptionHandler.Instance.HandleException(ex);
-                            }
-                        });
-                    }
-                    else
-                    {
-                        ProgressDialog.Show();
-                    }
+                            ProgressDialog.Show();
+                        }
+                        catch (Exception ex)
+                        {
+                            ExceptionHandler.HandleException(ex);
+                        }
+                    });
+                }
             }
             catch (Exception ex)
             {
-                ExceptionHandler.Instance.HandleException(ex);
+                ExceptionHandler.HandleException(ex);
             }
         }
 
@@ -78,28 +71,23 @@ namespace WeatherAppAndroid.Activities
             try
             {
                 if (ProgressDialog != null && ProgressDialog.IsShowing)
-                    if (!IsUiThread)
+                {
+                    this.RunOnMainThread(() =>
                     {
-                        this.RunOnMainThread(() =>
+                        try
                         {
-                            try
-                            {
-                                ProgressDialog.Hide();
-                            }
-                            catch (Exception ex)
-                            {
-                                ExceptionHandler.Instance.HandleException(ex);
-                            }
-                        });
-                    }
-                    else
-                    {
-                        ProgressDialog.Hide();
-                    }
+                            ProgressDialog.Hide();
+                        }
+                        catch (Exception ex)
+                        {
+                            ExceptionHandler.HandleException(ex);
+                        }
+                    });
+                }
             }
             catch (Exception ex)
             {
-                ExceptionHandler.Instance.HandleException(ex);
+                ExceptionHandler.HandleException(ex);
             }
         }
 

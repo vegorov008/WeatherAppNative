@@ -252,26 +252,22 @@ namespace WeatherAppAndroid.Activities
 
                 if (position != null)
                 {
-                    if (!IsUiThread)
+                    RunOnMainThread(() =>
                     {
-                        RunOnMainThread(() =>
+                        try
                         {
-                            try
+                            map.MoveCamera(CameraUpdateFactory.NewLatLng(new LatLng(position.Latitude, position.Longitude)));
+
+                            if (GetWeatherTask == null || GetWeatherTask.IsCanceled || GetWeatherTask.IsCompleted || GetWeatherTask.IsFaulted)
                             {
-                                map.MoveCamera(CameraUpdateFactory.NewLatLng(new LatLng(position.Latitude, position.Longitude)));
+                                HideProgressDialog();
                             }
-                            catch (Exception ex)
-                            {
-                                ExceptionHandler.HandleException(ex);
-                            }
-                            HideProgressDialog();
-                        });
-                    }
-                    else
-                    {
-                        map.MoveCamera(CameraUpdateFactory.NewLatLng(new LatLng(position.Latitude, position.Longitude)));
-                        HideProgressDialog();
-                    }
+                        }
+                        catch (Exception ex)
+                        {
+                            ExceptionHandler.HandleException(ex);
+                        }
+                    });
                 }
             }
             catch (Exception ex)
@@ -290,7 +286,7 @@ namespace WeatherAppAndroid.Activities
 
                 if (CheckUserLocationPermission())
                 {
-                    OnUserLocationReceived += GetWeater_OnUserLocationReceived;
+                    OnUserLocationReceived += GetWeather_OnUserLocationReceived;
                     GetUserLocation();
                 }
                 else
@@ -306,12 +302,12 @@ namespace WeatherAppAndroid.Activities
             }
         }
 
-        private async void GetWeater_OnUserLocationReceived(Position position)
+        private async void GetWeather_OnUserLocationReceived(Position position)
         {
             try
             {
                 if (OnUserLocationReceived != null)
-                    OnUserLocationReceived -= GetWeater_OnUserLocationReceived;
+                    OnUserLocationReceived -= GetWeather_OnUserLocationReceived;
 
                 var weatherData = await Ioc.GetInstance<IWeatherService>().GetWeather(position.Latitude, position.Longitude);
                 if (weatherData != null)
@@ -440,7 +436,7 @@ namespace WeatherAppAndroid.Activities
                     }
                 });
 
-                alertBuilder.SetNegativeButton(Resource.String.Deny, (sender, e) => 
+                alertBuilder.SetNegativeButton(Resource.String.Deny, (sender, e) =>
                 {
                     try
                     {
