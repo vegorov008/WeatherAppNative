@@ -8,12 +8,12 @@ namespace WeatherAppAndroid.Activities
 {
     public class BaseActivity : AppCompatActivity
     {
-        long uiThreadId;
+        long _uiThreadId;
         public bool IsUiThread
         {
             get
             {
-                return Java.Lang.Thread.CurrentThread().Id == uiThreadId;
+                return Java.Lang.Thread.CurrentThread().Id == _uiThreadId;
             }
         }
 
@@ -24,7 +24,7 @@ namespace WeatherAppAndroid.Activities
             try
             {
                 base.OnCreate(savedInstanceState);
-                uiThreadId = Java.Lang.Thread.CurrentThread().Id;
+                _uiThreadId = Java.Lang.Thread.CurrentThread().Id;
 
                 ProgressDialog = new ProgressDialog(this)
                 {

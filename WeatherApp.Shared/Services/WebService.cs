@@ -17,11 +17,11 @@ namespace WeatherApp.Core.Services
             }
         }
 
-        HttpClient client = new HttpClient();
+        HttpClient _client = new HttpClient();
 
         public WebService()
         {
-            client.Timeout = new TimeSpan(0, 0, 60);
+            _client.Timeout = new TimeSpan(0, 0, 60);
         }
 
         public Task<HttpResponseMessage> Get(string uri)
@@ -34,7 +34,7 @@ namespace WeatherApp.Core.Services
             HttpResponseMessage response = null;
             using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri))
             {
-                response = await client.SendAsync(request);
+                response = await _client.SendAsync(request);
             }
             return response;
         }

@@ -23,10 +23,10 @@ namespace WeatherAppAndroid.Activities
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : BaseActivity, IOnMapReadyCallback
     {
-        TextView tempValueTextView = null;
-        TextView humValueTextView = null;
+        TextView _tempValueTextView = null;
+        TextView _humValueTextView = null;
 
-        readonly string[] userLocationPermissions =
+        readonly string[] _userLocationPermissions =
         {
             Manifest.Permission.AccessCoarseLocation,
             Manifest.Permission.AccessFineLocation
@@ -43,9 +43,8 @@ namespace WeatherAppAndroid.Activities
         private Task GetUserLocationTask { get; set; }
         private Task GetWeatherTask { get; set; }
 
-        GoogleMap map = null;
-
-        Marker userLocationMarker = null;
+        GoogleMap _map = null;
+        Marker _userLocationMarker = null;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             try
@@ -69,8 +68,8 @@ namespace WeatherAppAndroid.Activities
 
                 // google map
                 var mapContainer = FindViewById<LinearLayout>(Resource.Id.MapContainer);
-                tempValueTextView = FindViewById<TextView>(Resource.Id.TempValueTextView);
-                humValueTextView = FindViewById<TextView>(Resource.Id.HumidityValueTextView);
+                _tempValueTextView = FindViewById<TextView>(Resource.Id.TempValueTextView);
+                _humValueTextView = FindViewById<TextView>(Resource.Id.HumidityValueTextView);
 
                 GoogleMapOptions mapOptions = new GoogleMapOptions()
                     .InvokeMapType(GoogleMap.MapTypeNormal)
@@ -117,7 +116,7 @@ namespace WeatherAppAndroid.Activities
         {
             try
             {
-                map = googleMap;
+                _map = googleMap;
                 OnUserLocationReceived += UpdateUserLocationMarker;
 
                 if (CheckUserLocationPermission())
@@ -148,12 +147,12 @@ namespace WeatherAppAndroid.Activities
                         if (OnUserLocationPermissionGranted != null)
                             OnUserLocationPermissionGranted -= SetupGoogleMap;
 
-                        if (map != null)
+                        if (_map != null)
                         {
                             //if (!map.MyLocationEnabled)
                             //    map.MyLocationEnabled = true;
 
-                            map.MyLocationButtonClick += Map_UserLocationButtonClick;
+                            _map.MyLocationButtonClick += Map_UserLocationButtonClick;
                             MoveCameraToUserLocation();
                         }
                     }
@@ -178,15 +177,15 @@ namespace WeatherAppAndroid.Activities
                 {
                     try
                     {
-                        if (userLocationMarker == null)
+                        if (_userLocationMarker == null)
                         {
                             MarkerOptions options = new MarkerOptions();
                             options.SetPosition(new LatLng(position.Latitude, position.Longitude));
-                            userLocationMarker = map.AddMarker(options);
+                            _userLocationMarker = _map.AddMarker(options);
                         }
                         else
                         {
-                            userLocationMarker.Position = new LatLng(position.Latitude, position.Longitude);
+                            _userLocationMarker.Position = new LatLng(position.Latitude, position.Longitude);
                         }
                     }
                     catch (Exception ex)
@@ -205,7 +204,7 @@ namespace WeatherAppAndroid.Activities
         {
             try
             {
-                if (map != null)
+                if (_map != null)
                 {
                     ShowProgressDialog();
                     if (CheckUserLocationPermission())
@@ -256,7 +255,7 @@ namespace WeatherAppAndroid.Activities
                     {
                         try
                         {
-                            map.MoveCamera(CameraUpdateFactory.NewLatLng(new LatLng(position.Latitude, position.Longitude)));
+                            _map.MoveCamera(CameraUpdateFactory.NewLatLng(new LatLng(position.Latitude, position.Longitude)));
 
                             if (GetWeatherTask == null || GetWeatherTask.IsCanceled || GetWeatherTask.IsCompleted || GetWeatherTask.IsFaulted)
                             {
@@ -339,8 +338,8 @@ namespace WeatherAppAndroid.Activities
             {
                 if (weatherData != null)
                 {
-                    tempValueTextView.Text = weatherData.Temp.ToString();
-                    humValueTextView.Text = weatherData.Humidity.ToString();
+                    _tempValueTextView.Text = weatherData.Temp.ToString();
+                    _humValueTextView.Text = weatherData.Humidity.ToString();
                 }
             }
             catch (Exception ex)
@@ -406,7 +405,7 @@ namespace WeatherAppAndroid.Activities
                 }
                 else
                 {
-                    RequestPermissions(userLocationPermissions, userLocationPermissionRequestId);
+                    RequestPermissions(_userLocationPermissions, userLocationPermissionRequestId);
                 }
             }
             catch (Exception ex)
@@ -428,7 +427,7 @@ namespace WeatherAppAndroid.Activities
                 {
                     try
                     {
-                        RequestPermissions(userLocationPermissions, userLocationPermissionRequestId);
+                        RequestPermissions(_userLocationPermissions, userLocationPermissionRequestId);
                     }
                     catch (Exception ex)
                     {
